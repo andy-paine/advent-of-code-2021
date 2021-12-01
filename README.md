@@ -13,3 +13,9 @@ Evaluate the part using `opa eval` e.g.:
 ```bash
 opa eval part_1 --package aoc -d rego/policy.rego -f values -i input.txt
 ```
+
+### Crystal
+Evaluate each part using `crystal run` e.g.:
+```bash
+cat input.txt | crystal run crystal/part-1.cr
+```
