@@ -1,1 +1,1 @@
-jq -s 'reduce .[] as $i ([0, .[0]]; [.[0] + if $i > .[1] then 1 else 0 end, $i]) | .[0]'
+jq -s 'reduce .[] as $i ({t:0,l:.[0]}; {t:(.t+if $i>.l then 1 else 0 end), l:$i}) | .t'
