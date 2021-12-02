@@ -1,1 +1,1 @@
-jq -R | jq -s 'map(split(" ")) | map([.[0], (.[1] | tonumber)]) | reduce .[] as $i ([0,0]; if $i[0] | test("f") then [.[0],.[1]+$i[1]] elif $i[0] | test("u") then [.[0]-$i[1],.[1]] elif $i[0] | test("d") then [.[0]+$i[1],.[1]] else . end) | .[0]*.[1]'
+jq -R | jq -s 'map(split(" ")) | map([.[0], (.[1]|tonumber)]) | reduce .[] as [$d,$x] ({h:0,d:0}; .+(if $d|test("f") then {h:(.h+$x)} elif $d|test("u") then {d:(.d-$x)} elif $d|test("d") then {d:(.d+$x)} else {} end)) | .d*.h'
