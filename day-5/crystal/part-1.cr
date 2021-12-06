@@ -1,6 +1,5 @@
 input = STDIN.gets_to_end.strip.split("\n").map(&.split(" -> ")).map { |s| s.map { |c| Tuple(Int32, Int32).from(c.split(",").map(&.to_i)) } }
-points = input.reduce([] of {Int32, Int32}) do |points, l|
-  s, e = l
+points = input.reduce([] of {Int32, Int32}) do |points, (s,e)|
   vec = {e[0]-s[0],e[1]-s[1]}
   next points unless vec.any?(&.zero?)
   size = vec.map(&.abs).max
