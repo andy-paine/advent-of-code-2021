@@ -14,9 +14,9 @@ def paired?(a, b)
     a_dists.each do |adk, ad|
       b_dists.each do |bdk, bd|
         shared = bd & ad
-        if shared.size >= 6
+        if shared.size >= 12
           dx, dy, dz = (0..2).map { |i| bdk[i] - adk[i] }
-        return {rot.map { |x, y, z| {x - dx, y - dy, z - dz} }, {dx,dy,dz}}
+          return {rot.map { |x, y, z| {x - dx, y - dy, z - dz} }, {dx,dy,dz}}
         end
       end
     end
@@ -55,7 +55,4 @@ until scanners.empty?
     end
   end
 end
-paired.map(&.last).combinations(2).each do |(a,b)|
-  f = (0..2).map{|i| b[i]-a[i]}.sum.abs
-  puts "#{a} => #{b} = #{f}"
-end
+puts paired.map(&.last).combinations(2).map{|(a,b)| (0..2).map{|i| (b[i]-a[i]).abs}.sum }.max
